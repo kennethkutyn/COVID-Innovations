@@ -8,3 +8,8 @@
   font-size: 2em;
   overflow: hidden;
 }
+
+.form {
+  height: 1700px;
+  width: 100%;
+}

@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import Hero from '../components/hero'
 import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
+import NeedPreview from '../components/need-preview'
 
 class RootIndex extends React.Component {
   render() {
@@ -17,9 +18,9 @@ class RootIndex extends React.Component {
       <Layout location={this.props.location}>
         <div style={{ background: '#fff' }}>
           <Helmet title={siteTitle} />
-          <Hero data={author.node} />
+          <Hero data= {author.node} />
           <div className="wrapper">
-            <h2 className="section-headline">Recent articles</h2>
+            <h2 className="section-headline">Recent Contributions</h2>
             <ul className="article-list">
               {posts.map(({ node }) => {
                 return (

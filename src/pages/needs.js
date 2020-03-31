@@ -4,7 +4,7 @@ import get from 'lodash/get'
 import Helmet from 'react-helmet'
 import styles from './blog.module.css'
 import Layout from '../components/layout'
-import ArticlePreview from '../components/article-preview'
+import NeedPreview from '../components/need-preview'
 
 class NeedsIndex extends React.Component {
   render() {
@@ -15,14 +15,13 @@ class NeedsIndex extends React.Component {
       <Layout location={this.props.location}>
         <div style={{ background: '#fff' }}>
           <Helmet title={siteTitle} />
-          <div className={styles.hero}>Needs</div>
           <div className="wrapper">
-            <h2 className="section-headline">Recent articles</h2>
+            <h2 className="section-headline">Needs Assessments</h2>
             <ul className="article-list">
               {needs.map(({ node }) => {
                 return (
                   <li key={node.slug}>
-                    <ArticlePreview article={node} />
+                    <NeedPreview article={node} />
                   </li>
                 )
               })}
