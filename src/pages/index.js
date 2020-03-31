@@ -10,6 +10,7 @@ class RootIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const posts = get(this, 'props.data.allContentfulBlogPost.edges')
+    const needs = get(this, 'props.data.allContentfulNeeds2.edges')
     const [author] = get(this, 'props.data.allContentfulPerson.edges')
 
     return (
@@ -27,6 +28,17 @@ class RootIndex extends React.Component {
                   </li>
                 )
               })}
+
+            </ul>
+            <ul className="article-list">
+              {needs.map(({ node }) => {
+                return (
+                  <li key={node.slug}>
+                    <ArticlePreview article={node} />
+                  </li>
+                )
+              })}
+
             </ul>
           </div>
         </div>
@@ -48,7 +60,7 @@ export const pageQuery = graphql`
           tags
           heroImage {
             fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
-              ...GatsbyContentfulFluid_tracedSVG
+              ...GatsbyContentfulFluid
             }
           }
           description {
@@ -59,6 +71,30 @@ export const pageQuery = graphql`
         }
       }
     }
+
+
+    allContentfulNeeds2(sort: { fields: [publishDate], order: DESC }) {
+      edges {
+        node {
+          title
+          slug
+          publishDate(formatString: "MMMM Do, YYYY")
+          tags
+          heroImage {
+            fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
+              ...GatsbyContentfulFluid
+            }
+          }
+          description {
+            childMarkdownRemark {
+              html
+            }
+          }
+        }
+      }
+    }
+
+
     allContentfulPerson(
       filter: { contentful_id: { eq: "15jwOBqpxqSAOy2eOO4S0m" } }
     ) {
@@ -76,7 +112,7 @@ export const pageQuery = graphql`
               resizingBehavior: PAD
               background: "rgb:000000"
             ) {
-              ...GatsbyContentfulFluid_tracedSVG
+              ...GatsbyContentfulFluid
             }
           }
         }
